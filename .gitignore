@@ -33,3 +33,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore firebase api key
+/javascript/env.js
+
+# Ignore firebase secret key
+/config/service_account.json
