@@ -1,7 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { initializeApp, getApp } from "firebase/app"
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { firebaseConfig } from "../env"
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getFirebaseAuth } from "../firebase"
 
 let idToken = null;
 let initialized = false;
@@ -17,8 +16,7 @@ export default class extends Controller {
   initialize() {
     if (initialized) return;
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const auth = getFirebaseAuth();
 
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -52,8 +50,7 @@ export default class extends Controller {
 
   async loginWithEmailAndPassword() {
     try {
-      const app = getApp();
-      const auth = getAuth(app);
+      const auth = getFirebaseAuth();
       const email = this.emailTarget.value;
       const password = this.passwordTarget.value;
       await signInWithEmailAndPassword(auth, email, password)
@@ -65,8 +62,7 @@ export default class extends Controller {
 
   async logout() {
     try {
-      const app = getApp();
-      const auth = getAuth(app);
+      const auth = getFirebaseAuth();
       await signOut(auth)
     } catch (error) {
       console.log("logout error", error)
