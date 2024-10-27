@@ -12,6 +12,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "firebase-admin-sdk"
 gem "google-cloud-firestore"
+gem "bootstrap", "~> 5.0.2"
+gem "jquery-rails"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
