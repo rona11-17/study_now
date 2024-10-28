@@ -1,1 +1,8 @@
 <%= @user.email %>
+<%= @user.uid %>
+<div data-controller="test-firebase" data-test-firebase-uid="<%= @user.uid %>">
+  <p data-test-firebase-target="output">Loading user data...</p>
+  <button data-action="click->test-firebase#updateStudyFlag">
+    update study flag
+  </button>
+</div>
