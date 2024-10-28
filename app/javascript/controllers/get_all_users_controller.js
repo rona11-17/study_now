@@ -28,6 +28,7 @@ export default class extends Controller {
   displayUsers(users) {
     // 取得したユーザー情報をoutputターゲットに表示
     this.outputTarget.innerHTML = users
+      .filter(user => user.is_study === 0)
       .map(user => `<p>${user.name} - ${user.is_study}</p>`)
       .join("");
   }
