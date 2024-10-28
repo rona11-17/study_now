@@ -12,7 +12,7 @@ export default class extends Controller {
 
   loadUserData() {
     const db = getFirebaseStore();
-    const docRef = doc(db, "users", "user1");
+    const docRef = doc(db, "users", "");
 
     // リアルタイムのデータ監視を設定
     onSnapshot(docRef, (docSnap) => {
@@ -31,8 +31,10 @@ export default class extends Controller {
     event.preventDefault();
     console.log("hello");
 
+    const uid = this.data.get("uid")
+
     const db = getFirebaseStore();
-    const docRef = doc(db, "users", "user1");
+    const docRef = doc(db, "users", uid);
 
     try {
       const docSnap = await getDoc(docRef);
