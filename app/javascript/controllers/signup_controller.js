@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
-import { initializeApp } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { getFirebaseAuth } from "../firebase"
+import { getFirebaseAuth, getFirebaseStore } from "../firebase"
+import { doc, setDoc } from "firebase/firestore"
 
 export default class extends Controller {
   static targets = ["email", "password"]
@@ -22,6 +22,13 @@ export default class extends Controller {
       // Firebaseでユーザーを登録
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password)
       const uid = userCredential.user.uid
+
+      // Firestoreにユーザのデータ格納
+      const db = getFirebaseStore();
+      await setDoc(doc(db, "users", uid), {
+        name: "test_user",
+        is_study: 1
+      })
 
       // Railsバックエンドにユーザーを登録
       const response = await this.createUserOnBackend(uid, email)
