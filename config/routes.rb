@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "mypage" => "mypage#index"
   get "login" => "login#index"
+  get "realtime" => "realtime#index"
+  resources :timelines, only: [ :new ]
   resources :users, only: [ :index, :new, :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
