@@ -56,7 +56,7 @@ export default class extends Controller {
           const newIsStudy = 1; // フラグを勉強中(1)に
           const latest_duration = docSnap.data().total_pause_duration;
           const now = new Date();
-          const latest_paused_time = docSnap.data().paused_time;
+          const latest_paused_time = docSnap.data().paused_time.toDate();
           //新しいdurationに更新
           //durationはnumber型、nowとtmp_paused_timeはDate型、now-tmp_paused_timeはnumber型(ミリ秒単位)
           //つまりnew_duration(number型の秒) = now_duration(秒) + (ミリ秒)
@@ -108,6 +108,4 @@ export default class extends Controller {
       console.log("error", e);
     }
   }
-
-  
 }
