@@ -34,7 +34,7 @@ export default class extends Controller {
       const response = await this.createUserOnBackend(uid, email)
 
       if (response.ok) {
-        Turbo.visit("/mypage")
+        Turbo.visit("/realtime")
       } else {
         throw new Error("バックエンドでのユーザー登録に失敗しました。")
       }

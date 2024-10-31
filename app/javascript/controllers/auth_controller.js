@@ -35,7 +35,7 @@ export default class extends Controller {
 
       // 認証必要なページで認証失敗している
       // ログインページにリダイレクト
-      Turbo.visit("/", { action: "replace" });
+      Turbo.visit("/login", { action: "replace" });
     });
 
     document.addEventListener("turbo:before-fetch-request", (event) => {
@@ -54,7 +54,7 @@ export default class extends Controller {
       const email = this.emailTarget.value;
       const password = this.passwordTarget.value;
       await signInWithEmailAndPassword(auth, email, password)
-      Turbo.visit("/mypage", { action: "replace" });
+      Turbo.visit("/realtime", { action: "replace" });
     } catch (error) {
       console.log("login error", error)
     }
