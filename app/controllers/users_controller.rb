@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate
   def index
     @users = User.all
+    @user = User.find_by(uid: @uid)
   end
 
   def new

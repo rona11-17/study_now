@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  get "relationships/followings"
+  get "relationships/followers"
   get "mypage" => "mypage#index"
   get "login" => "login#index"
   get "realtime" => "realtime#index"
+  resources :relationships, only: [:create, :destroy]
+  get "followings" => "relationships#followings", as: "followings"
+  get "followers" => "relationships#followers", as: "followers"
+
   resources :timelines, only: [ :new ]
   resources :users, only: [ :index, :new, :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
