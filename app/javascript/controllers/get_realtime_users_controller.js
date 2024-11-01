@@ -48,12 +48,15 @@ export default class extends Controller {
       .filter(user => (user.is_study === 1 || user.is_study === 2))
       .map(user => {
         let ellapsed_time;
+        let display_time;
         if (user.is_study === 1) {
           ellapsed_time = Math.floor(((now - user.start_time.toDate()) - user.total_pause_duration)/1000);
-          return `<p>${user.name} - ${user.is_study} - ${ellapsed_time}</p>`
+          display_time = this.formatTimeDisplay(ellapsed_time);
+          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`
         } else if (user.is_study === 2) {
           ellapsed_time = Math.floor(((user.paused_time.toDate() - user.start_time.toDate()) - user.total_pause_duration)/1000);
-          return `<p>${user.name} - ${user.is_study} - ${ellapsed_time}</p>`
+          display_time = this.formatTimeDisplay(ellapsed_time);
+          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`
         }
       })
       .join("");
@@ -61,5 +64,12 @@ export default class extends Controller {
 
   disconnect() {
     clearInterval(this.timer); // タイマーをクリア
+  }
+
+  formatTimeDisplay(time) {
+    const hours = String(Math.floor(time / (60*60))).padStart(2, 0);
+    const minutes = String(Math.floor((time % (60*60)) / 60)).padStart(2, 0);
+    const seconds = String(Math.floor(time % 60)).padStart(2, 0);
+    return `${hours}:${minutes}:${seconds}`;
   }
 }
