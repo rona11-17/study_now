@@ -12,7 +12,7 @@ export default class extends Controller {
 
   loadUserData() {
     const db = getFirebaseStore();
-    const docRef = doc(db, "users", "");
+    const docRef = doc(db, "users", "a");
 
     // リアルタイムのデータ監視を設定
     onSnapshot(docRef, (docSnap) => {
