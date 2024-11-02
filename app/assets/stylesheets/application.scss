@@ -50,3 +50,34 @@
     color: #333;             /* 文字色 */
     margin-bottom: 20px;     /* 下に少し余白 */
   }
+
+/* カードスタイル */
+.user-card {
+  background-color: #f9f9f9;
+  border: 2px solid #a3d0ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
+}
+
+.user-card h3 {
+  margin: 0;
+  color: #333;
+}
+
+.user-card p {
+  color: #555;
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.user-card strong {
+  color: #000;
+}

@@ -52,11 +52,21 @@ export default class extends Controller {
         if (user.is_study === 1) {
           ellapsed_time = Math.floor(((now - user.start_time.toDate()) - user.total_pause_duration)/1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`
+          return `<div class="user-card">
+                    <h3>${user.name}</h3>
+                    <p><strong>ステータス:</strong> 勉強中</p>
+                    <p><strong>経過時間:</strong> ${display_time}</p>
+                    <p><strong>詳細:</strong> ${user.text} | ${user.place} | ${user.comment}</p>
+                  </div>`;
         } else if (user.is_study === 2) {
           ellapsed_time = Math.floor(((user.paused_time.toDate() - user.start_time.toDate()) - user.total_pause_duration)/1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`
+          return `<div class="user-card">
+                    <h3>${user.name}</h3>
+                    <p><strong>ステータス:</strong> 一時停止中</p>
+                    <p><strong>経過時間:</strong> ${display_time}</p>
+                    <p><strong>詳細:</strong> ${user.text} | ${user.place} | ${user.comment}</p>
+                  </div>`;
         }
       })
       .join("");
