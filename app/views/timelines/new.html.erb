@@ -1,13 +1,14 @@
 <%= link_to '今Now勉強してる人', realtime_path, class: 'btn btn-primary mb-4' %>
 
 <div class="container mt-5">
+  <!-- 時間の描画 -->
   <div data-controller="get-current-usertime" class="text-center mb-3">
     <p class="timer-display" data-get-current-usertime-target="output" data-get-current-usertime-uid="<%= @user.uid %>">
       Loading user data...
     </p>
   </div>
 
-  <div data-controller="timer" class="text-center">
+  <div data-controller="timer" class="text-center m-3">
     <!-- 中央の大ボタン -->
     <button 
       data-timer-target="output" 
@@ -16,12 +17,37 @@
       class="btn justify-content-center btn-outline-primary rounded-circle fixed-circle-btn small-circle-btn">
       開始
     </button>
-    
+
     <!-- 右側の小ボタン -->
     <button 
       data-action="click->timer#finish" 
       class="btn justify-content-center btn-outline-dark rounded-circle fixed-circle-btn small-circle-btn">
       完了
     </button>
+  </div>
+
+  <!-- 教材,場所,コメントの登録 -->
+  <div class="position-relative text-box-container text-center" data-controller="exchange-info" style="padding-bottom: 50px;"
+    <form class="row g-3">
+    <div class="col-12">
+      <label for="inputText" class="form-label">教材<br /></label>
+      <input type="text" class"form-control" id="Text" placeholder="プログラミング">
+    </div>
+    <div class="col-12">
+      <label for="inputPlace" class="form-label">場所</label>
+      <input type="text" class"form-control" id="Place" placeholder="大学の図書館">
+    </div>
+    <div class="col-12">
+      <label for="inputComments" class="form-label">内容</label>
+      <input type="text" class"form-control" id="Comments" placeholder="Railsチュートリアルの..."></input>
+    </div>
+    <button
+      data-exchange-info-target="output"
+      data-exchange-info-uid="<%= @user.uid %>"
+      data-action="click->exchange-info#send"
+      class="btn btn-primary ">
+        更新
+    </button>
+    </form>
   </div>
 </div>
