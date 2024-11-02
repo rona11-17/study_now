@@ -1,50 +1,51 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
-*/
 @import "bootstrap";
-/* ロゴ風のカスタムスタイル */
-.navbar-brand {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #007bff !important;
-    letter-spacing: 0.05em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+/* カラーテーマの設定 */
+:root {
+  --primary-color: #007bff;       /* メインカラー */
+  --secondary-color: #0056b3;     /* メインの暗い色 */
+  --accent-color: #00c6ff;        /* アクセントカラー */
+  --text-color: #333;             /* メインテキストカラー */
+  --background-color: #f0f8ff;    /* 背景色 */
 }
 
+/* 全体の背景色 */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* ロゴ風のカスタムスタイル */
 .navbar-brand {
-    background: linear-gradient(45deg, #007bff, #00c6ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.05em;
 }
 
 /* 大ボタンのスタイル */
 .fixed-circle-btn {
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1rem;
-  }
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
 
-  /* 小ボタン */
-  .small-circle-btn {
-    width: 90px;   /* 固定の幅 */
-    height: 90px;  /* 固定の高さ */
-  }
+/* 小ボタン */
+.small-circle-btn {
+  width: 90px;   /* 固定の幅 */
+  height: 90px;  /* 固定の高さ */
+}
+
+.small-circle-btn:hover {
+  background-color: var(--secondary-color);
+}
 
   /* 時間表示のスタイル */
-.timer-display {
+  .timer-display {
     font-size: 3rem;         /* 大きなフォントサイズ */
     font-weight: bold;       /* 太字 */
     color: #333;             /* 文字色 */
@@ -53,26 +54,42 @@
 
 /* カードスタイル */
 .user-card {
-  background-color: #f9f9f9;
-  border: 2px solid #a3d0ff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  transition: transform 0.2s ease-in-out;
-}
+    background-color: white;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin: 15px auto; /* 上下の余白を15px、左右は自動で中央寄せ */
+    max-width: 600px;  /* カードの最大幅を600pxに設定 */
+    transition: transform 0.2s ease-in-out;
+  }
 
 .user-card h3 {
   margin: 0;
-  color: #333;
+  color: var(--text-color);
 }
 
 .user-card p {
-  color: #555;
+  color: var(--text-color);
   margin: 5px 0;
   line-height: 1.5;
 }
 
 .user-card strong {
-  color: #000;
+  color: var(--secondary-color);
+}
+
+/* カスタムボタン */
+.custom-button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: var(--secondary-color);
 }

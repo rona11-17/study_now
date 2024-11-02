@@ -134,7 +134,7 @@ export default class extends Controller {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const newIsStudy = 0; // フラグを停止(2)に
-          await updateDoc(docRef, { is_study: newIsStudy, total_pause_duration: 0});
+          await updateDoc(docRef, { is_study: newIsStudy, total_pause_duration: 0, place: "", text: "", comment: ""});
           this.currentAction = "start";//次始まる時は開始から
           this.outputTarget.textContent = "開始";
         } else {
