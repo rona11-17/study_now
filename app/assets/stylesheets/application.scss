@@ -62,11 +62,6 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.user-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
-}
-
 .user-card h3 {
   margin: 0;
   color: #333;
