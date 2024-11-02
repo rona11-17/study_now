@@ -1,14 +1,27 @@
-<%= link_to 'To realtime', realtime_path %>
+<%= link_to '今Now勉強してる人', realtime_path, class: 'btn btn-primary mb-4' %>
 
-<div data-controller="get-current-usertime">
-  <p data-get-current-usertime-target="output" data-get-current-usertime-uid="<%= @user.uid %>">Loading user data...</p>
-</div>
+<div class="container mt-5">
+  <div data-controller="get-current-usertime" class="text-center mb-3">
+    <p class="timer-display" data-get-current-usertime-target="output" data-get-current-usertime-uid="<%= @user.uid %>">
+      Loading user data...
+    </p>
+  </div>
 
-<div data-controller="timer">
-  <button data-timer-target="output" data-timer-uid="<%= @user.uid %>" data-action="click->timer#nextAction">
-    開始
-  </button>
-  <button data-action="click->timer#finish">
-    完了
-  </button>
+  <div data-controller="timer" class="text-center">
+    <!-- 中央の大ボタン -->
+    <button 
+      data-timer-target="output" 
+      data-timer-uid="<%= @user.uid %>" 
+      data-action="click->timer#nextAction" 
+      class="btn justify-content-center btn-outline-primary rounded-circle fixed-circle-btn small-circle-btn">
+      開始
+    </button>
+    
+    <!-- 右側の小ボタン -->
+    <button 
+      data-action="click->timer#finish" 
+      class="btn justify-content-center btn-outline-dark rounded-circle fixed-circle-btn small-circle-btn">
+      完了
+    </button>
+  </div>
 </div>

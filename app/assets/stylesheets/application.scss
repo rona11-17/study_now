@@ -28,3 +28,25 @@
     -webkit-text-fill-color: transparent;
     font-weight: 700;
 }
+
+/* 大ボタンのスタイル */
+.fixed-circle-btn {
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  /* 小ボタン */
+  .small-circle-btn {
+    width: 90px;   /* 固定の幅 */
+    height: 90px;  /* 固定の高さ */
+  }
+
+  /* 時間表示のスタイル */
+.timer-display {
+    font-size: 3rem;         /* 大きなフォントサイズ */
+    font-weight: bold;       /* 太字 */
+    color: #333;             /* 文字色 */
+    margin-bottom: 20px;     /* 下に少し余白 */
+  }
