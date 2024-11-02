@@ -4,12 +4,16 @@ Rails.application.routes.draw do
   get "mypage" => "mypage#index"
   get "login" => "login#index"
   get "realtime" => "realtime#index"
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [ :create, :destroy ]
   get "followings" => "relationships#followings", as: "followings"
   get "followers" => "relationships#followers", as: "followers"
 
   resources :timelines, only: [ :new ]
-  resources :users, only: [ :index, :new, :create ]
+  resources :users, only: [ :index, :new, :create ] do
+    collection do
+      get "search"
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

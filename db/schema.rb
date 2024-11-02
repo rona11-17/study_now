@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_02_033911) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_02_084958) do
   create_table "relationships", force: :cascade do |t|
     t.string "follower_id"
     t.string "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
   create_table "users", primary_key: "uid", id: :string, force: :cascade do |t|

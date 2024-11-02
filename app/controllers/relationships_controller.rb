@@ -7,8 +7,13 @@ class RelationshipsController < ApplicationController
   end
   # フォロー外すとき
   def destroy
+    puts "ここからデバッグ"
+    puts params
+    puts "ここからparams[:relationship][:user_id]"
+    puts params[:relationship]
     @user = User.find_by(uid: @uid)
-    @user.unfollow(params[:user_id])
+    puts "ここからあんふぉろー"
+    @user.unfollow(params[:relationship][:user_id])
     redirect_to request.referer
   end
   # フォロー一覧
