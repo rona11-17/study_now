@@ -1,2 +1,9 @@
-<h1>Relationships#followings</h1>
-<p>Find me in app/views/relationships/followings.html.erb</p>
+<div>
+  <% @following_users.each do |user| %>
+    <%= user.name %>
+    <%= form_with(url: relationships_path, method: :delete) do %>
+      <%= hidden_field_tag :uid, user.uid %>
+      <%= submit_tag "フォロー解除" %>
+    <% end %>
+  <% end %>
+</div>
