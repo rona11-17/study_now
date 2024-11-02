@@ -12,3 +12,19 @@
  *
 */
 @import "bootstrap";
+/* ロゴ風のカスタムスタイル */
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #007bff !important;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
