@@ -32,7 +32,10 @@ export default class extends Controller {
         is_study: 0,
         paused_time: now,
         start_time: now,
-        total_pause_duration: 0
+        total_pause_duration: 0,
+        text:"",
+        place:"",
+        comment:""
       })
 
       // Railsバックエンドにユーザーを登録
