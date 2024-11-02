@@ -1,16 +1,49 @@
-// app/javascript/controllers/cities_controller.js
+// app/javascript/controllers/timer_controller.js
 import { Controller } from "stimulus";
 import { doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore"; 
 import { getFirebaseStore } from "../firebase";
 
 export default class extends Controller {
-  static targets = ["output"];
-  
+  static targets = ["buttonAction"];
 
   constructor(uid) {
     super();
     this.uid = "Tm1Mv7FLpscyRzErRXTgGbzmKdZ2" ;
   }
+
+  initialize(){
+    this.currentAction = "start";
+  }
+
+  async nextAction(event){
+    event.preventDefault();
+    console.log("hello")
+
+    // if (this.buttonActionTarget) {
+    //   console.log("buttonActionTarget is defined:", this.buttonActionTarget);
+    // } else {
+    //   console.error("buttonActionTarget is undefined!");
+    // }
+
+    if (this.currentAction === "start") {
+      console.log("A")
+      await this.start(event);
+      this.currentAction = "stop";//次は一時停止に
+      this.buttonActionTarget.textContent = "一時停止";
+    } else if (this.currentAction === "stop") {
+      console.log("B")
+      await this.start(event);
+      this.currentAction = "restart";//次は再開に
+      this.buttonActionTarget.textContent = "再開";
+    } else if (this.currentAction === "restart") {
+      console.log("C")
+      await this.start(event);
+      this.currentAction = "stop";//次は一時停止に
+      this.buttonActionTarget.textContent = "一時停止";
+    }
+  }
+
+
 
   async start(event){
     event.preventDefault();
@@ -78,6 +111,8 @@ export default class extends Controller {
         if (docSnap.exists()) {
           const newIsStudy = 0; // フラグを停止(2)に
           await updateDoc(docRef, { is_study: newIsStudy, total_pause_duration: 0});
+          this.currentAction = "stop";//次始まる時は開始から
+          this.buttonActionTarget.textContent = "開始";
         } else {
           console.log("There is no user");
         }
