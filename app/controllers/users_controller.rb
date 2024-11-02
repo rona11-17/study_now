@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate
+  #before_action :authenticate
+  #ここには要らんかったかも
   def index
     @users = User.all
     @user = User.find_by(uid: @uid)
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    #user_paramsにはsignup_controllerからPOSTで送られてくるbodyの中身が入ってる
     @user = User.new(user_params)
 
     if @user.save
@@ -22,6 +24,9 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:uid, :email)
+    #登録時に,requireで許可したパラメータしか更新できないようpermitで指定する
+    #セキュリティ面で管理者権限とかを守るため
+    #rails側がuser_paramsを通さないと新規登録できないようにする
+    params.require(:user).permit(:uid, :email, :name)
   end
 end
