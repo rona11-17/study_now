@@ -4,5 +4,6 @@ class TimelinesController < ApplicationController
   end
 
   def new
+    @user = User.find_by(uid: @uid)
   end
 end

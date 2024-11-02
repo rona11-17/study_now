@@ -7,6 +7,7 @@ export default class extends Controller {
   static targets = ["output"];
 
   connect() {
+    this.userUid = this.outputTarget.dataset.getCurrentUsertimeUid
     console.log("UserListController connected");
 
     // Firestoreの初期化
@@ -45,20 +46,20 @@ export default class extends Controller {
   updateDisplay() {
     const now = new Date();
     this.outputTarget.innerHTML = this.users
-      .filter(user => user.id === window.currentUid) // 自分のUIDに一致するユーザーだけをフィルタリング
+      .filter(user => user.id === this.userUid) // 自分のUIDに一致するユーザーだけをフィルタリング
       .map(user => {
         let ellapsed_time;
         let display_time;
         if (user.is_study === 1) {
           ellapsed_time = Math.floor(((now - user.start_time.toDate()) - user.total_pause_duration) / 1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`;
+          return `<p>${display_time}</p>`;
         } else if (user.is_study === 2) {
           ellapsed_time = Math.floor(((user.paused_time.toDate() - user.start_time.toDate()) - user.total_pause_duration) / 1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${user.name} - ${user.is_study} - ${display_time}</p>`;
+          return `<p>${display_time}</p>`;
         } else {
-          return `<p>${user.name} - ${user.is_study} - 00:00:00</p>`;
+          return `<p>00:00:00</p>`;
         }
       })
       .join("");

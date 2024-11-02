@@ -1,18 +1,11 @@
-<script>
-  window.currentUid = "<%= @uid %>"; // application_controller.rbで設定した@uidをJavaScriptに渡す
-</script>
-
 <%= link_to 'To realtime', realtime_path %>
 
 <div data-controller="get-current-usertime">
-  <p data-get-current-usertime-target="output">Loading user data...</p>
+  <p data-get-current-usertime-target="output" data-get-current-usertime-uid="<%= @user.uid %>">Loading user data...</p>
 </div>
 
-
-<%= @uid %>
-
 <div data-controller="timer">
-  <button data-timer-target="output" data-action="click->timer#nextAction">
+  <button data-timer-target="output" data-timer-uid="<%= @user.uid %>" data-action="click->timer#nextAction">
     開始
   </button>
   <button data-action="click->timer#finish">

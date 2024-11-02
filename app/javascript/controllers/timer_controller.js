@@ -7,7 +7,7 @@ export default class extends Controller {
   static targets = ["output"];
 
   initialize(){
-    this.uid = "Tm1Mv7FLpscyRzErRXTgGbzmKdZ2" ;
+    this.uid = this.outputTarget.dataset.timerUid ;
     this.currentAction = "start";
   }
 
