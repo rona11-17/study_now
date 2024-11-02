@@ -1,10 +1,8 @@
-<%= link_to '勉強中の人を見る', realtime_path, class: 'btn btn-primary mb-4' %>
-
 <div class="container mt-5">
   <!-- 時間の描画 -->
   <div data-controller="get-current-usertime" class="text-center mb-3">
     <p class="timer-display" data-get-current-usertime-target="output" data-get-current-usertime-uid="<%= @user.uid %>">
-      Loading user data...
+      
     </p>
   </div>
 
