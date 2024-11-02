@@ -1,6 +1,6 @@
 // app/javascript/controllers/get_realtime_users_controller.js
 import { Controller } from "stimulus";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { getFirebaseStore } from "../firebase";
 
 export default class extends Controller {
@@ -14,9 +14,14 @@ export default class extends Controller {
 
     // usersコレクションのリアルタイムリスナーを設定
     const usersCollection = collection(db, "users");
+    
+    const followingIdsJson = this.element.dataset.followingIds;
+    const followingIds = JSON.parse(followingIdsJson)
+
+    const followingUsers = query(usersCollection, where("uid", "in", followingIds))
 
     // onSnapshotを使ってリアルタイムでデータを取得
-    onSnapshot(usersCollection, (snapshot) => {
+    onSnapshot(followingUsers, (snapshot) => {
       let users = [];
       snapshot.forEach((doc) => {
         users.push({ id: doc.id, ...doc.data() });

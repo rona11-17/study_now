@@ -1,4 +1,4 @@
-<div data-controller="get-realtime-users" class="text-center">
+<div data-controller="get-realtime-users" class="text-center" data-following-ids="<%= @following_ids.to_json %>">
   <p data-get-realtime-users-target="output">Loading user data...</p>
   <%= link_to '勉強を始める', new_timeline_path, class: 'btn btn-primary custom-button ' %>
 </div>
