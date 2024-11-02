@@ -1,0 +1,24 @@
+<h1>ユーザ検索</h1>
+<%= form_with url: search_users_path, method: :get do |form| %>
+  <div>
+    <%= form.label :name, '名前で検索' %>
+    <%= form.text_field :name, value: params[:name] %>
+  </div>
+  <div>
+    <%= form.submit '検索' %>
+  </div>
+<% end %>
+
+<h2>検索結果</h2>
+
+<% if @not_follow_users.any? %>
+  <% @not_follow_users.each do |user| %>
+    <div>
+      <p><%= user.name %></p>
+      <%= form_with(url: relationships_path, method: :post) do |f| %>
+        <%= hidden_field_tag :user_id, user.uid %>
+        <%= submit_tag "フォロー" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

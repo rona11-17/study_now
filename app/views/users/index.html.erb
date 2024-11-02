@@ -1,15 +1,16 @@
-<div data-controller="get-all-users">
-  <h2>ユーザー一覧</h2>
-  <div data-get-all-users-target="output">ユーザーデータを読み込んでいます...</div>
-</div>
-
-<%= @users.each do |user| %>
-  <% if @user.following?(user) %>
-    <%= link_to "フォロー外す", relationships_path(user.id), method: :delete %>
-  <% else %>
-  <%= form_with(url: relationships_path(user_id: user.id), method: :post) do %>
-    <%= submit_tag "フォローする" %>
-  <% end %>
-  <% end %>
+<% @following_users.each do |user| %>
+  <div>
+    <% if @user.following?(user) %>
+      <%= user.email %>
+      <!---削除ボタン設置 -->
+      <%= form_with model: @user.relationships.find_by(followed_id: user.uid), method: :delete do |f| %>
+        <%= f.hidden_field :user_id, value: user.uid %>
+        <%= f.submit "フォロー解除" %>
+      <% end %>
+    <% else %>
+      <%= user.email %>
+      <!-- フォローボタン接地 -->
+    <% end %>
+  </div>
 <% end %>
 

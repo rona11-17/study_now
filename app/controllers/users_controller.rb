@@ -1,13 +1,27 @@
 class UsersController < ApplicationController
-  #before_action :authenticate
-  #ここには要らんかったかも
+  before_action :authenticate, only: [ :index, :search ]
   def index
-    @users = User.all
     @user = User.find_by(uid: @uid)
+    @following_users = @user.followings
   end
 
   def new
     @user = User.new
+  end
+
+  def search
+    @user = User.find_by(uid: @uid)
+    if params[:name].present?
+      users = User.where("name LIKE ?", "%#{params[:name]}") || []
+      followed_user_ids = @user.followings.pluck(:uid)
+      puts "デバッグ"
+      puts followed_user_ids
+      @not_follow_users = users.where.not(uid: followed_user_ids)
+      puts "デバッグ"
+      puts @not_follow_users
+    else
+      @not_follow_users = []
+    end
   end
 
   def create

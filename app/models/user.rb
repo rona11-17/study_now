@@ -17,10 +17,13 @@ class User < ApplicationRecord
   end
   # フォローを外すときの処理
   def unfollow(user_id)
+    puts user_id
     relationships.find_by(followed_id: user_id).destroy
   end
   # フォローしているか判定
   def following?(user)
-    followings.include?(user)
+    puts "以下デバッグ"
+    puts relationships
+    relationships.exists?(followed_id: user.uid)
   end
 end
