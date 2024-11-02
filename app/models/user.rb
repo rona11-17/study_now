@@ -26,4 +26,8 @@ class User < ApplicationRecord
     puts relationships
     relationships.exists?(followed_id: user.uid)
   end
+
+  def following_user_ids
+    followings.pluck(:uid)
+  end
 end

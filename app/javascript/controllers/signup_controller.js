@@ -28,6 +28,7 @@ export default class extends Controller {
       const db = getFirebaseStore();
       const now = new Date()
       await setDoc(doc(db, "users", uid), {
+        uid: uid,
         name: name,
         is_study: 0,
         paused_time: now,
