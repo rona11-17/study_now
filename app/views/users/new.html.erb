@@ -20,6 +20,7 @@
             <div class="mb-3">
               <%= f.label :password, 'パスワード', class: 'form-label' %>
               <%= f.password_field :password, class: 'form-control', data: { signup_target: "password" } %>
+              <small>6文字以上のパスワードを入力してください</small>
             </div>
 
             <div class="d-grid">
@@ -30,4 +31,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div>
+  <small style="display: block; text-align: center;">
+    既にアカウントをお持ちの方は<%= link_to 'ログイン', login_path %>
+  </small>
 </div>
