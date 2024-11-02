@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  get "relationships/followings"
-  get "relationships/followers"
   get "mypage" => "mypage#index"
   get "login" => "login#index"
   get "realtime" => "realtime#index"
-  resources :relationships, only: [ :create, :destroy ]
-  get "followings" => "relationships#followings", as: "followings"
-  get "followers" => "relationships#followers", as: "followers"
+
+  resources :relationships, only: [ :create ] do
+    collection do
+      delete "", action: :destroy
+      get "followings"
+      get "followers"
+    end
+  end
 
   resources :timelines, only: [ :new ]
   resources :users, only: [ :index, :new, :create ] do
