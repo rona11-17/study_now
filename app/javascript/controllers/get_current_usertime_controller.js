@@ -53,13 +53,13 @@ export default class extends Controller {
         if (user.is_study === 1) {
           ellapsed_time = Math.floor(((now - user.start_time.toDate()) - user.total_pause_duration) / 1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${display_time}</p>`;
+          return `<p class="timer-display">${display_time}</p>`;
         } else if (user.is_study === 2) {
           ellapsed_time = Math.floor(((user.paused_time.toDate() - user.start_time.toDate()) - user.total_pause_duration) / 1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
-          return `<p>${display_time}</p>`;
+          return `<p class="timer-display">${display_time}</p>`;
         } else {
-          return `<p>00:00:00</p>`;
+          return `<p class="timer-display">00:00:00</p>`;
         }
       })
       .join("");

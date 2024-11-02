@@ -5,25 +5,63 @@ import { getFirebaseStore } from "../firebase";
 
 export default class extends Controller {
   static targets = ["output"];
+  
 
-  initialize(){
+  async initialize(){
     this.uid = this.outputTarget.dataset.timerUid ;
-    this.currentAction = "start";
+    this.currentStatus = 0;
+    this.currentAction = "start"
+    this.setupRealtimeListener();
+  }
+
+  setupRealtimeListener() {
+    const db = getFirebaseStore();
+    const docRef = doc(db, "users", this.uid);
+
+    // Firestoreのリアルタイムリスナー
+    onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.is_study !== this.currentStatus) { // 状態が変わった時のみ更新
+          this.currentStatus = data.is_study;
+          this.updateButtonText();
+        }
+      } else {
+        console.log("No document found");
+      }
+    }, (error) => {
+      this.outputTarget.textContent = `Error getting realtime document: ${error}`;
+    });
+  }
+
+  updateButtonText() {
+    if (this.currentStatus === 0) {
+      this.outputTarget.textContent = "開始";
+      this.currentAction = "start";
+    } else if (this.currentStatus === 1) {
+      this.outputTarget.textContent = "一時停止";
+      this.currentAction = "stop";
+    } else if (this.currentStatus === 2) {
+      this.outputTarget.textContent = "再開";
+      this.currentAction = "restart";
+    }
   }
 
   async nextAction(event){
     event.preventDefault();
-
     if (this.currentAction === "start") {
       await this.start(event);
+      this.currentStatus = 1;
       this.currentAction = "stop";//次は一時停止に
       this.outputTarget.textContent = "一時停止";
     } else if (this.currentAction === "stop") {
       await this.stop(event);
+      this.currentStatus = 2;
       this.currentAction = "restart";//次は再開に
       this.outputTarget.textContent = "再開";
     } else if (this.currentAction === "restart") {
       await this.restart(event);
+      this.currentStatus = 1;
       this.currentAction = "stop";//次は一時停止に
       this.outputTarget.textContent = "一時停止";
     }
