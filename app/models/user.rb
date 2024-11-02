@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   validates :uid, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
 
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

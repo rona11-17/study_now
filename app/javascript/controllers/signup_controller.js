@@ -4,7 +4,7 @@ import { getFirebaseAuth, getFirebaseStore } from "../firebase"
 import { doc, setDoc } from "firebase/firestore"
 
 export default class extends Controller {
-  static targets = ["email", "password"]
+  static targets = ["name","email", "password"]
   
   initialize() {
     this.auth = getFirebaseAuth();
@@ -15,23 +15,28 @@ export default class extends Controller {
 
     const email = this.emailTarget.value
     const password = this.passwordTarget.value
+    const name = this.nameTarget.value
 
     console.log("register controller")
 
     try {
-      // Firebaseでユーザーを登録
+      // Firebase authenticationに新規登録
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password)
       const uid = userCredential.user.uid
 
       // Firestoreにユーザのデータ格納
       const db = getFirebaseStore();
+      const now = new Date()
       await setDoc(doc(db, "users", uid), {
-        name: "test_user",
-        is_study: 1
+        name: name,
+        is_study: 0,
+        paused_time: now,
+        start_time: now,
+        total_pause_duration: 0
       })
 
       // Railsバックエンドにユーザーを登録
-      const response = await this.createUserOnBackend(uid, email)
+      const response = await this.createUserOnBackend(uid, email, name)
 
       if (response.ok) {
         Turbo.visit("/realtime")
@@ -44,7 +49,7 @@ export default class extends Controller {
     }
   }
 
-  async createUserOnBackend(uid, email) {
+  async createUserOnBackend(uid, email, name) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
     return await fetch("/users", {
@@ -53,7 +58,7 @@ export default class extends Controller {
         "Content-Type": "application/json",
         "X-CSRF-Token": csrfToken
       },
-      body: JSON.stringify({ user: {uid: uid, email: email} })
+      body: JSON.stringify({ user: {uid: uid, email: email, name: name} })
     })
   }
 }
