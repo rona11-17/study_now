@@ -58,18 +58,32 @@ export default class extends Controller {
           ellapsed_time = Math.floor(((now - user.start_time.toDate()) - user.total_pause_duration)/1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
           return `<div class="user-card">
-                    <h3>${user.name}</h3>
-                    <p><strong>ステータス:</strong> 勉強中</p>
-                    <p><strong>経過時間:</strong> ${display_time}</p>
+                    <div class="user-info">
+                      <!-- SVGでのシンプルなアバターアイコン -->
+                      <svg width="30" height="30" class="avatar-icon">
+                        <circle cx="15" cy="15" r="15" fill="#ccc"></circle>
+                        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="20" font-family="Arial">👤</text>
+                      </svg>
+                      <h3 class="user-name">${user.name}</h3>
+                    </div>
+                    <p><strong>経過時間:</strong> <span class="highlighted-time">${display_time}</span></p>
+                    <p><strong>ステータス:</strong> 一時停止中</p>
                     <p><strong>詳細:</strong> ${user.text} | ${user.place} | ${user.comment}</p>
                   </div>`;
         } else if (user.is_study === 2) {
           ellapsed_time = Math.floor(((user.paused_time.toDate() - user.start_time.toDate()) - user.total_pause_duration)/1000);
           display_time = this.formatTimeDisplay(ellapsed_time);
           return `<div class="user-card">
-                    <h3>${user.name}</h3>
+                    <div class="user-info">
+                      <!-- SVGでのシンプルなアバターアイコン -->
+                      <svg width="30" height="30" class="avatar-icon">
+                        <circle cx="15" cy="15" r="15" fill="#ccc"></circle>
+                        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="20" font-family="Arial">👤</text>
+                      </svg>
+                      <h3 class="user-name">${user.name}</h3>
+                    </div>
+                    <p><strong>経過時間:</strong> <span class="highlighted-time">${display_time}</span></p>
                     <p><strong>ステータス:</strong> 一時停止中</p>
-                    <p><strong>経過時間:</strong> ${display_time}</p>
                     <p><strong>詳細:</strong> ${user.text} | ${user.place} | ${user.comment}</p>
                   </div>`;
         }

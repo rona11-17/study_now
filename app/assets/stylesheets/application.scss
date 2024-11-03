@@ -54,6 +54,7 @@ body {
 
 /* カードスタイル */
 .user-card {
+    position: relative;
     background-color: white;
     border: 2px solid var(--accent-color);
     border-radius: 8px;
@@ -63,6 +64,14 @@ body {
     max-width: 600px;  /* カードの最大幅を600pxに設定 */
     transition: transform 0.2s ease-in-out;
   }
+
+/* 名前のスタイル */
+.user-name {
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--text-color);
+  margin: 0;
+}
 
 .user-card h3 {
   margin: 0;
@@ -77,6 +86,25 @@ body {
 
 .user-card strong {
   color: var(--secondary-color);
+}
+
+/* ユーザー情報の横並び配置 */
+.user-info {
+  display: flex;
+  align-items: center; /* アイコンと名前を垂直方向で中央揃え */
+}
+
+/* アバターアイコンのスタイル */
+.avatar-icon {
+  margin-right: 10px; /* アイコンと名前の間のスペース */
+}
+
+/* 経過時間の強調スタイル */
+.highlighted-time {
+  font-size: 3em; /* 経過時間の大きめのフォントサイズ */
+  font-weight: bold; /* 太字で強調 */
+  color: var(--text-color); /* 文字色を設定 */
+  margin-left: 10px; /* ユーザー名との間にスペースを追加 */
 }
 
 /* カスタムボタン */
