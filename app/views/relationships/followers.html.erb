@@ -1,3 +1,22 @@
-<% @followed_users.each do |user| %>
-  <%= user.name %>
-<% end %>
+<div class="container mt-4">
+  <!-- フォロワーの人数を表示 -->
+  <div class="text-center mb-3">
+    <h4><%= @followed_users.size %>人のフォロワー</h4>
+  </div>
+
+  <!-- フォロワーの一覧表示 -->
+  <div class="list-group">
+    <% @followed_users.each do |user| %>
+      <div class="list-group-item d-flex align-items-center">
+        <!-- SVGでのシンプルなアバターアイコン -->
+        <svg width="40" height="40" class="me-3">
+          <circle cx="20" cy="20" r="20" fill="#ccc"></circle>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="20" font-family="Arial">👤</text>
+        </svg>
+
+        <!-- ユーザー名の表示 -->
+        <span class="me-auto"><%= user.name %></span>
+      </div>
+    <% end %>
+  </div>
+</div>
