@@ -1,9 +1,28 @@
-<div>
-  <% @following_users.each do |user| %>
-    <%= user.name %>
-    <%= form_with(url: relationships_path, method: :delete) do %>
-      <%= hidden_field_tag :uid, user.uid %>
-      <%= submit_tag "フォロー解除" %>
+<div class="container mt-4">
+  <!-- フォローしている人数を表示 -->
+  <div class="text-center mb-3">
+    <h4><%= @following_users.size %>人フォロー中</h4>
+  </div>
+
+  <!-- フォローしているユーザーの一覧表示 -->
+  <div class="list-group">
+    <% @following_users.each do |user| %>
+      <div class="list-group-item d-flex align-items-center">
+        <!-- SVGでの共通アバターアイコン -->
+        <svg width="40" height="40" class="me-3">
+          <circle cx="20" cy="20" r="20" fill="#ccc"></circle>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="20" font-family="Arial">👤</text>
+        </svg>
+
+        <!-- ユーザー名の表示 -->
+        <span class="me-auto"><%= user.name %></span>
+
+        <!-- フォロー解除ボタン -->
+        <%= form_with(url: relationships_path, method: :delete, class: "d-inline") do %>
+          <%= hidden_field_tag :uid, user.uid %>
+          <%= submit_tag "フォロー解除", class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
