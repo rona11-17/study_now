@@ -16,16 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_gon_variables
-    if Rails.env.development?
-      firebase_config = {
-        apiKey: ENV["FIREBASE_API_KEY"],
-        authDomain: ENV["FIREBASE_AUTH_DOMAIN"],
-        projectId: ENV["FIREBASE_PROJECT_ID"],
-        storageBucket: ENV["FIREBASE_STORAGE_BUCKET"],
-        messagingSenderId: ENV["FIREBASE_MESSAGING_SENDER_ID"],
-        appId: ENV["FIREBASE_APP_ID"]
-      }
-      gon.firebase_config = firebase_config
-    end
+    firebase_config = {
+      apiKey: ENV["FIREBASE_API_KEY"],
+      authDomain: ENV["FIREBASE_AUTH_DOMAIN"],
+      projectId: ENV["FIREBASE_PROJECT_ID"],
+      storageBucket: ENV["FIREBASE_STORAGE_BUCKET"],
+      messagingSenderId: ENV["FIREBASE_MESSAGING_SENDER_ID"],
+      appId: ENV["FIREBASE_APP_ID"]
+    }
+    gon.firebase_config = firebase_config
   end
 end

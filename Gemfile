@@ -13,13 +13,13 @@ gem "firebase-admin-sdk"
 gem "google-cloud-firestore"
 gem "bootstrap", "~> 5.0.2"
 gem "jquery-rails"
+gem "gon"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
-  gem "gon"
   gem "sqlite3", ">= 1.4"
 end
 
