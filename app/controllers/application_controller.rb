@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  include Gon::ControllerHelpers
-
   before_action :set_gon_variables
 
   def authenticate
