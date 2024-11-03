@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { getFirebaseStore } from "../firebase";
 
 export default class extends Controller {
-  static targets = ["output"];
+  static targets = ["output", "study"];
 
   connect() {
     console.log("UserListController connected");
@@ -75,6 +75,7 @@ export default class extends Controller {
         }
       })
       .join("");
+    this.studyTarget.classList.remove("hidden");
   }
 
   disconnect() {
