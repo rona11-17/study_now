@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
       messagingSenderId: ENV["FIREBASE_MESSAGING_SENDER_ID"],
       appId: ENV["FIREBASE_APP_ID"]
     }
-
     gon.firebase_config = firebase_config
   end
 end
