@@ -73,6 +73,15 @@ body {
   margin: 0;
 }
 
+/*カードの右上の開始時間のスタイル*/
+.start-time{
+  position: absolute; /* 絶対位置で配置 */
+  top: 10px; /* 上からの距離 */
+  right: 10px; /* 右からの距離 */
+  font-size: 1em; /* フォントサイズを設定 */
+  font-weight: normal;
+}
+
 .user-card h3 {
   margin: 0;
   color: var(--text-color);
