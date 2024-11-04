@@ -15,6 +15,11 @@ body {
   color: var(--text-color);
 }
 
+/*ヘッダーの背景*/
+.custom-header-bg {
+  background-color: #bfd8f5; /* Bootstrapのprimary色より薄い青 */
+}
+
 /* ロゴ風のカスタムスタイル */
 .navbar-brand {
   font-family: 'Poppins', sans-serif;
@@ -55,7 +60,7 @@ body {
 /* カードスタイル */
 .user-card {
     background-color: white;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px 20px;
@@ -96,4 +101,15 @@ body {
 
 .hidden {
   display: none;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px; /* 下線の太さ */
+  text-decoration-color: var(--primary-color); /* 下線の色 */
+  text-underline-offset: 3px; /* 文字からの下線の距離 */
 }
